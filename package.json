@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/bloominstituteoftechnology/node-api1-guided#readme",
   "devDependencies": {
+    "eslint": "^8.3.0",
     "nodemon": "^2.0.15"
   }
 }
