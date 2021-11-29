@@ -10,8 +10,8 @@ In this project we will learn how to create a simple Web API using `Node.js` and
 
 ## Project Setup
 
-- [ ] Clone this repository.
-- [ ] Open the project folder in VSCode.
+- [x] Clone this repository.
+- [x] Open the project folder in VSCode.
 
 ## Assignment
 
