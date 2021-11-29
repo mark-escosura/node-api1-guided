@@ -47,8 +47,8 @@ server.get("/api/dogs/:id", async (req, res) => {
     const dog = await Dog.findById(req.params.id);
     if (!dog) {
       res.status(404).json({
-        message: `dog by id ${req.params.id} does not exist`
-      })
+        message: `dog by id ${req.params.id} does not exist`,
+      });
     } else {
       res.json(dog);
     }
@@ -81,26 +81,45 @@ server.post("/api/dogs", async (req, res) => {
   }
 });
 // [PUT] /api/dogs/:id (U of CRUD, update dog with :id using JSON payload)
-server.put('/api/dogs/:id', async (req, res) => {
-  const { id } = req.params
-  const { body }= req
+server.put("/api/dogs/:id", async (req, res) => {
+  const { id } = req.params;
+  const { body } = req;
   try {
-    const updated = await Dog.update(id, body)
+    const updated = await Dog.update(id, body);
     if (!updated) {
       res.status(404).json({
         message: `dog by id ${id} does not exists`,
-      })
+      });
     } else {
-      res.json(updated)
+      res.json(updated);
     }
   } catch (err) {
     res.status(500).json({
       message: "error updating existing dog",
-      error: err. message
-    })
+      error: err.message,
+    });
   }
-})
+});
 // [DELETE] /api/dogs/:id (D of CRUD, remove dog with :id)
-
+server.delete("/api/dogs/:id",
+  async (req, res) => {
+    const { id } = req.params;
+    Dog.delete(id)
+      .then((deletedDog) => {
+        if (!deletedDog) {
+          res.status(404).json({
+            message: `dog by id ${id} does not exists`,
+          });
+        } else {
+          res.json(deletedDog);
+        }
+      })
+      .catch((err) => {
+        res.status(500).json({
+          message: "error deleting dog",
+          error: err.message,
+        });
+      });
+  });
 // EXPOSING THE SERVER TO OTHER MODULES
 module.exports = server;
